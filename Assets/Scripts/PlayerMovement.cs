@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     private void FixedUpdate()
     {
-        Vector2 movement = moveInput * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
+        Vector2 movement = moveInput.normalized * moveSpeed;
+        rb.linearVelocity = movement;
     }
 }
