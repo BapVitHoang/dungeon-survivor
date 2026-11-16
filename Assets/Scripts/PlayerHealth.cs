@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 5;
     [SerializeField] private float damgeCooldown = 1f;
+    [SerializeField] private Slider healthSlider;
 
     private int currentHealth;
     private float cooldownTimer;
@@ -12,6 +15,11 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
     }
 
     // Update is called once per frame
@@ -35,6 +43,12 @@ public class PlayerHealth : MonoBehaviour
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        if (healthSlider != null)
+        {
+            healthSlider.value = currentHealth;
+        }
+
         Debug.Log("Player Health: " + currentHealth + "/" + maxHealth);
         if (currentHealth <= 0)
         {
@@ -46,5 +60,8 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("GAME OVER");
         gameObject.SetActive(false);
+        OnDied?.Invoke();
     }
+
+    public event Action OnDied;
 }
