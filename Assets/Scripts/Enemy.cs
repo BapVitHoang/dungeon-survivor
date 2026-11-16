@@ -1,15 +1,18 @@
 using UnityEngine;
-
+using System.Collections;
 public class Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private GameObject xpGemPrefab;
+    [SerializeField] private AudioClip hitSFX;
 
     private int currentHealth;
     private Rigidbody2D rb;
     private Transform playerTransform;
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     void Start()
     {
@@ -20,6 +23,12 @@ public class Enemy : MonoBehaviour
         {
             playerTransform = playerObj.transform;
         }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
     }
 
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
@@ -28,6 +37,17 @@ public class Enemy : MonoBehaviour
         if (playerTransform != null)
         {
             Vector2 direction = (playerTransform.position - transform.position).normalized;
+            if (spriteRenderer != null)
+            {
+                if (direction.x < -0.01f)
+                {
+                    spriteRenderer.flipX = true; // Face left
+                }
+                else if (direction.x > 0.01f)
+                {
+                    spriteRenderer.flipX = false; // Face right
+                }
+            }
             rb.linearVelocity = direction * moveSpeed;
 
         }
@@ -36,10 +56,14 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        AudioManager.Instance?.PlaySFX(hitSFX);
         if (currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+           StartCoroutine(HitFlash());
         }
     }
 
@@ -51,5 +75,15 @@ public class Enemy : MonoBehaviour
             Instantiate(xpGemPrefab, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
+    }
+
+    private IEnumerator HitFlash()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.1f); 
+            spriteRenderer.color = originalColor; 
+        }
     }
 }

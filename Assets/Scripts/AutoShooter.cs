@@ -5,7 +5,8 @@ public class AutoShooter : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float fireInterval = 1f;
     [SerializeField] private float fireRange = 10f;
-    
+    [SerializeField] private AudioClip shootSFX;
+
     float fireTimer;
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class AutoShooter : MonoBehaviour
         GameObject nearestEnemy = FindNearestEnemy();
         if (nearestEnemy == null) return;
         GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        AudioManager.Instance?.PlaySFX(shootSFX);
         Vector2 direction = (nearestEnemy.transform.position - transform.position).normalized;
 
         Bullet bullet = bulletObj.GetComponent<Bullet>();

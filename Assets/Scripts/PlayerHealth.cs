@@ -5,8 +5,9 @@ using System;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 5;
-    [SerializeField] private float damgeCooldown = 1f;
+    [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private AudioClip damageSFX;
 
     private int currentHealth;
     private float cooldownTimer;
@@ -36,14 +37,14 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && cooldownTimer <= 0)
         {
             TakeDamage(1);
-            cooldownTimer = damgeCooldown;
+            cooldownTimer = damageCooldown;
         }
     }
 
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        AudioManager.Instance?.PlaySFX(damageSFX);
         if (healthSlider != null)
         {
             healthSlider.value = currentHealth;

@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = direction * speed;
+        transform.up = direction; // Rotate the bullet to face the direction of movement
         lifetime = Mathf.Max(lifetime, 0.1f); // Ensure lifetime is positive
         Destroy(gameObject, lifetime);
     }

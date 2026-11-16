@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     private void WinGame()
     {
         isGameOver = true;
+        AudioManager.Instance?.SetMusicVolume(0.08f);
         Time.timeScale = 0f;
         Debug.Log("You Survived! You Win!");
         if (endPanel != null)
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
     private void HandlePlayerDied()
     {
         isGameOver = true;
+        AudioManager.Instance?.SetMusicVolume(0.08f);
         Time.timeScale = 0f;
         Debug.Log("You Died! Game Over!");
         if (endPanel != null)
@@ -93,6 +95,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        AudioManager.Instance?.SetMusicVolume(0.3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

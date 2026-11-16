@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 166839849674006676}
   - component: {fileID: 8894338991654189245}
   m_Layer: 0
-  m_Name: Isometric Diamond
+  m_Name: XPGem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03774, y: 2.46, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,8 +83,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 0.15555152, g: 0.63783973, b: 0.7610062, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ade445bf66412394e8ada28aa75fa9a4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XPGem
   xpAmount: 1
+  collectSFX: {fileID: 8300000, guid: 345cf3c4482b1774fad8a509232e0810, type: 3}
