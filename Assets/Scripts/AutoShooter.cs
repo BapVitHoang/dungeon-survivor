@@ -50,4 +50,11 @@ public class AutoShooter : MonoBehaviour
         }
         return nearestEnemy;
     }
+
+    public void UpgradeFireRate()
+    {
+        fireInterval = Mathf.Max(0.15f, fireInterval * 0.8f); // Decrease fire interval but not below 0.1 seconds
+        Debug.Log("Fire rate upgraded! New fire interval: " + fireInterval);
+
+    }
 }

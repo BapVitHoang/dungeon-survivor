@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   moveSpeed: 3
+  maxHealth: 2
+  xpGemPrefab: {fileID: 4035835439903146077, guid: b862de28738036044a81a8319689a8af, type: 3}
 --- !u!58 &2552004767191629239
 CircleCollider2D:
   m_ObjectHideFlags: 0

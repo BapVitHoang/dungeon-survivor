@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde9f86c7c854414fae3235e431a29d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  survivalTime: 10
+  survivalTime: 60
   timerText: {fileID: 867967510}
   playerHealth: {fileID: 1592279185}
   endPanel: {fileID: 1436653697}
@@ -503,8 +503,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217a09d203597e34e9fa7c8490df1586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefab: {fileID: 4989700645896654806, guid: e264b7c57a2256d40b9950bebaaef228, type: 3}
+  enemyPrefabs:
+  - {fileID: 4989700645896654806, guid: e264b7c57a2256d40b9950bebaaef228, type: 3}
+  - {fileID: 4989700645896654806, guid: 0911bab01b3c7f843989f485503b62a0, type: 3}
   spawnInterval: 1
+  minSpawnInterval: 0.5
+  spawnIntervalDecrease: 0.03
   spawnRadius: 10
 --- !u!1 &519420028
 GameObject:
@@ -1375,6 +1379,7 @@ GameObject:
   - component: {fileID: 1592279182}
   - component: {fileID: 1592279184}
   - component: {fileID: 1592279185}
+  - component: {fileID: 1592279186}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1573,6 +1578,21 @@ MonoBehaviour:
   maxHealth: 5
   damgeCooldown: 1
   healthSlider: {fileID: 1656095995}
+--- !u!114 &1592279186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592279178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5094e7d20450e748b9d7306af7a6685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLevel
+  currentLevel: 1
+  currentXP: 1
+  xpToNextLevel: 3
 --- !u!1 &1630091054
 GameObject:
   m_ObjectHideFlags: 0
