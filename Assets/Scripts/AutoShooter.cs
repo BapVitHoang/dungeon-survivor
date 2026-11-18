@@ -7,10 +7,14 @@ public class AutoShooter : MonoBehaviour
     [SerializeField] private float fireRange = 10f;
     [SerializeField] private AudioClip shootSFX;
 
-    float fireTimer;
+    [Header("Weapon Stats")]
+    [SerializeField] private int bulletDamage = 1;
+    [SerializeField] private int projectileCount = 1;
+    [SerializeField] private float spreadAngle = 15f;
 
-    // Update is called once per frame
-    void Update()
+    private float fireTimer;
+
+    private void Update()
     {
         fireTimer += Time.deltaTime;
         if (fireTimer >= fireInterval)
@@ -22,41 +26,65 @@ public class AutoShooter : MonoBehaviour
 
     private void ShootNearestEnemy()
     {
-        GameObject nearestEnemy = FindNearestEnemy();
+        Transform nearestEnemy = FindNearestEnemy();
         if (nearestEnemy == null) return;
-        GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        AudioManager.Instance?.PlaySFX(shootSFX);
-        Vector2 direction = (nearestEnemy.transform.position - transform.position).normalized;
 
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
-        if (bullet != null)
+        Vector2 baseDirection = (nearestEnemy.position - transform.position).normalized;
+        AudioManager.Instance?.PlaySFX(shootSFX);
+
+        float startAngle = -((projectileCount - 1) * spreadAngle) / 2f;
+        for (int i = 0; i < projectileCount; i++)
         {
-            bullet.SetDirection(direction);
+            float angle = startAngle + i * spreadAngle;
+            Vector2 dir = Quaternion.Euler(0f, 0f, angle) * baseDirection;
+            GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Bullet bullet = bulletObj.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                bullet.Initialize(dir, bulletDamage);
+            }
         }
+
     }
 
-    private GameObject FindNearestEnemy()
+    private Transform FindNearestEnemy()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject nearestEnemy = null;
-        float minDistance = fireRange;
 
-        foreach (var enemy in enemies)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, fireRange);
+        Transform nearestEnemy = null;
+        float closestDistanceSqr = Mathf.Infinity;
+
+        foreach (Collider2D hit in hits)
         {
-            float distance = Vector2.Distance(transform.position, enemy.transform.position);
-            if(distance < minDistance)
+            if (hit.CompareTag("Enemy"))
             {
-                minDistance = distance;
-                nearestEnemy = enemy;
+                float distanceSqr = (hit.transform.position - transform.position).sqrMagnitude;
+                if (distanceSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distanceSqr;
+                    nearestEnemy = hit.transform;
+                }
             }
         }
         return nearestEnemy;
     }
 
-    public void UpgradeFireRate()
-    {
-        fireInterval = Mathf.Max(0.15f, fireInterval * 0.8f); // Decrease fire interval but not below 0.1 seconds
-        Debug.Log("Fire rate upgraded! New fire interval: " + fireInterval);
 
+    public void UpgradeFireRate(float multiplier = 0.8f)
+    {
+        fireInterval = Mathf.Max(0.15f, fireInterval * multiplier);
+        Debug.Log("Fire rate upgraded! New fire interval: " + fireInterval);
+    }
+
+    public void UpgradeDamage(int amount)
+    {
+        bulletDamage = Mathf.Max(1, bulletDamage + amount);
+    }
+
+    public void AddProjectiles(int amount)
+    {
+        projectileCount = Mathf.Min(7, projectileCount + amount);
     }
 }
+
+

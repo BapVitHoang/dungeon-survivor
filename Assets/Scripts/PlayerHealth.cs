@@ -64,5 +64,15 @@ public class PlayerHealth : MonoBehaviour
         OnDied?.Invoke();
     }
 
+    public void UpgradeMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth += amount;
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
+    }
     public event Action OnDied;
 }

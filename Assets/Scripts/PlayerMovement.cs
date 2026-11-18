@@ -44,4 +44,12 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = movement;
     }
+
+    public void UpgradeMoveSpeed(float amount)
+    {
+        moveSpeed += amount;
+        Debug.Log($"Move speed upgraded by {amount}. New move speed: {moveSpeed}");
+    }
+
+
 }

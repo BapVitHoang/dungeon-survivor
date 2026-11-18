@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 25518664}
   - component: {fileID: 25518665}
+  - component: {fileID: 25518666}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -168,6 +169,26 @@ MonoBehaviour:
   playerHealth: {fileID: 1592279185}
   endPanel: {fileID: 1436653697}
   resultText: {fileID: 332005864}
+--- !u!114 &25518666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25518663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60263a145cd77e046b44ea30dca87d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
+  allUpgrades:
+  - {fileID: 11400000, guid: f8da4178edd200f48be5a142c8ea6f1f, type: 2}
+  - {fileID: 11400000, guid: 3710983ffb0be614ea13314b490c8d35, type: 2}
+  - {fileID: 11400000, guid: 7c0c8fbff3341e74b82993b7c936e619, type: 2}
+  - {fileID: 11400000, guid: 135037d57db9f724c88033b551d4662d, type: 2}
+  - {fileID: 11400000, guid: 06d7568066238254f82e73ddd4a0b90b, type: 2}
+  - {fileID: 11400000, guid: 9be57f807ca57bf4bb718168f8469277, type: 2}
+  player: {fileID: 1592279178}
 --- !u!1 &332005862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1677,9 @@ MonoBehaviour:
   fireInterval: 1
   fireRange: 10
   shootSFX: {fileID: 8300000, guid: 4d8c11d14661e0741ac920c595c48de0, type: 3}
+  bulletDamage: 1
+  projectileCount: 3
+  spreadAngle: 15
 --- !u!114 &1592279185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,6 +1711,7 @@ MonoBehaviour:
   currentLevel: 1
   currentXP: 1
   xpToNextLevel: 3
+  magnetRadius: 2.5
 --- !u!1 &1630091054
 GameObject:
   m_ObjectHideFlags: 0

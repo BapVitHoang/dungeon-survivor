@@ -1,8 +1,11 @@
-using UnityEngine;
+using System;
 using System.Collections;
+using UnityEngine;
+
 public class Enemy : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static event Action OnAnyEnemyDied;
+
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private GameObject xpGemPrefab;
@@ -13,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Transform playerTransform;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
+    private Coroutine flashCoroutine;
 
     void Start()
     {
@@ -63,7 +67,12 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-           StartCoroutine(HitFlash());
+
+            if (flashCoroutine != null)
+            {
+                StopCoroutine(flashCoroutine);
+            }
+            flashCoroutine = StartCoroutine(HitFlash());
         }
     }
 
@@ -74,6 +83,10 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(xpGemPrefab, transform.position, Quaternion.identity);
         }
+
+  
+        OnAnyEnemyDied?.Invoke();
+
         Destroy(gameObject);
     }
 
@@ -85,5 +98,6 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(0.1f); 
             spriteRenderer.color = originalColor; 
         }
+        flashCoroutine = null;
     }
 }
