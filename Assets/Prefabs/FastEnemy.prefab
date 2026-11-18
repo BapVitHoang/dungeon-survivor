@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 228517697084243193}
   - component: {fileID: 5604393102684135428}
   - component: {fileID: 4505870159756205397}
-  - component: {fileID: 9159970262295768203}
   - component: {fileID: 2552004767191629239}
+  - component: {fileID: -5985795289515098202}
   m_Layer: 0
   m_Name: FastEnemy
   m_TagString: Enemy
@@ -122,22 +122,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &9159970262295768203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4989700645896654806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36a77a72c3872a4e98b20564462c6a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  moveSpeed: 4.2
-  maxHealth: 1
-  xpGemPrefab: {fileID: 4035835439903146077, guid: b862de28738036044a81a8319689a8af, type: 3}
-  hitSFX: {fileID: 8300000, guid: a1b6effb9265ec14cba2be48559bc031, type: 3}
 --- !u!58 &2552004767191629239
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -174,3 +158,26 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-5985795289515098202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989700645896654806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff0acf27213b5148ad4792ece2e23a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChargerEnemy
+  moveSpeed: 4.2
+  maxHealth: 1
+  damage: 1
+  xpGemPrefab: {fileID: 4035835439903146077, guid: b862de28738036044a81a8319689a8af, type: 3}
+  hitSFX: {fileID: 8300000, guid: a1b6effb9265ec14cba2be48559bc031, type: 3}
+  dashRange: 5
+  telegraphDuration: 0.4
+  dashDuration: 0.2
+  dashSpeedMultiplier: 3
+  dashCooldown: 2
+  telegraphColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

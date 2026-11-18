@@ -524,13 +524,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217a09d203597e34e9fa7c8490df1586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefabs:
-  - {fileID: 4989700645896654806, guid: e264b7c57a2256d40b9950bebaaef228, type: 3}
-  - {fileID: 4989700645896654806, guid: 0911bab01b3c7f843989f485503b62a0, type: 3}
+  normalEnemyPrefab: {fileID: 4989700645896654806, guid: e264b7c57a2256d40b9950bebaaef228, type: 3}
+  chargerEnemyPrefab: {fileID: 4989700645896654806, guid: 0911bab01b3c7f843989f485503b62a0, type: 3}
+  eliteEnemyPrefab: {fileID: 4989700645896654806, guid: 394a8305a4267a14690bc0eaf9d1efad, type: 3}
   spawnInterval: 1
   minSpawnInterval: 0.5
   spawnIntervalDecrease: 0.03
   spawnRadius: 10
+  phase2StartTime: 30
+  phase3StartTime: 75
+  eliteInterval: 25
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1681,7 @@ MonoBehaviour:
   fireRange: 10
   shootSFX: {fileID: 8300000, guid: 4d8c11d14661e0741ac920c595c48de0, type: 3}
   bulletDamage: 1
-  projectileCount: 3
+  projectileCount: 1
   spreadAngle: 15
 --- !u!114 &1592279185
 MonoBehaviour:

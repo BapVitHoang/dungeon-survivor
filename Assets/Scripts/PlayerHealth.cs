@@ -36,7 +36,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && cooldownTimer <= 0)
         {
-            TakeDamage(1);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            int dmg = enemy != null ? enemy.Damage : 1; // Default damage to 1 if Enemy component is not found
+            TakeDamage(dmg);
             cooldownTimer = damageCooldown;
         }
     }

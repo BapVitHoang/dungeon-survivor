@@ -6,19 +6,22 @@ public class Enemy : MonoBehaviour
 {
     public static event Action OnAnyEnemyDied;
 
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private int maxHealth = 2;
+    [SerializeField] protected float moveSpeed = 3f;
+    [SerializeField] protected int maxHealth = 2;
+    [SerializeField] protected int damage = 1;
     [SerializeField] private GameObject xpGemPrefab;
     [SerializeField] private AudioClip hitSFX;
 
-    private int currentHealth;
-    private Rigidbody2D rb;
-    private Transform playerTransform;
-    private SpriteRenderer spriteRenderer;
-    private Color originalColor;
+    public int Damage => damage;
+
+    protected int currentHealth;
+    protected Rigidbody2D rb;
+    protected Transform playerTransform;
+    protected SpriteRenderer spriteRenderer;
+    protected Color originalColor;
     private Coroutine flashCoroutine;
 
-    void Start()
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
@@ -36,7 +39,7 @@ public class Enemy : MonoBehaviour
     }
 
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (playerTransform != null)
         {
