@@ -80,7 +80,7 @@ public class EnemySpawner : MonoBehaviour
         {
             return normalEnemyPrefab;
         }
-        if (elapsedTime > phase3StartTime)
+        if (elapsedTime < phase3StartTime)
         {
             return (Random.value < 0.35f) ? chargerEnemyPrefab : normalEnemyPrefab;
         }

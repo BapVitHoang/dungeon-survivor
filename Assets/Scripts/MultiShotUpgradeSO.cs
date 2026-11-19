@@ -17,6 +17,5 @@ public class MultiShotUpgradeSO : UpgradeSO
         {
             Debug.LogWarning("AutoShooter component not found on player.");
         }
-        // throw new System.NotImplementedException();
     }
 }
