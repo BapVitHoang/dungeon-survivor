@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbef6b17dbf51e40859ae749fe2e763, type: 3}
+  m_Name: Theme_MossyCatacombs
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaThemeSO
+  themeName: Mossy Catacombs
+  baseFloorTile: {fileID: 11400000, guid: 011c7070f0ae4d04ebcc0b0364dc7041, type: 2}
+  variantFloorTiles:
+  - {fileID: 11400000, guid: 64eaef7139b2efc48a121c065d3ac025, type: 2}
+  - {fileID: 11400000, guid: b2281d3a6d22f8440a9f831a1deb7ddc, type: 2}
+  variantChance: 0.25
+  wallTile: {fileID: 11400000, guid: b4e4e32f4e47c5b4296ad927044585db, type: 2}
+  obstacleTile: {fileID: 11400000, guid: 23af6c88c9b887441852b6dc72e5aee0, type: 2}
+  decorTiles:
+  - {fileID: 11400000, guid: 6b44a531e22f9a54881facbeb24dbbcb, type: 2}
+  - {fileID: 11400000, guid: 1577fb096a5ef2247878c9e2ed704069, type: 2}
+  decorChance: 0.045
+  floorTint: {r: 0.46, g: 0.58, b: 0.49, a: 1}
+  ambientLightColor: {r: 0.42, g: 0.55, b: 0.48, a: 1}
+  ambientIntensity: 0.6
+  torchLightColor: {r: 1, g: 0.82, b: 0.4, a: 1}
