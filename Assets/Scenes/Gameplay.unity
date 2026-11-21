@@ -657,6 +657,55 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &284987630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284987632}
+  - component: {fileID: 284987631}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &284987631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284987630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3108ab0fd0689024e99473dbbb4040db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolManager
+  bulletPrefab: {fileID: 2444067579674930778, guid: 9c3bc9bb605d496408fd33bc2dec058b, type: 3}
+  normalEnemyPrefab: {fileID: 9159970262295768203, guid: e264b7c57a2256d40b9950bebaaef228, type: 3}
+  chargerEnemyPrefab: {fileID: -5985795289515098202, guid: 0911bab01b3c7f843989f485503b62a0, type: 3}
+  eliteEnemyPrefab: {fileID: 9159970262295768203, guid: 394a8305a4267a14690bc0eaf9d1efad, type: 3}
+  xpgemPrefab: {fileID: 8894338991654189245, guid: b862de28738036044a81a8319689a8af, type: 3}
+--- !u!4 &284987632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284987630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &292815687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,13 +1796,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217a09d203597e34e9fa7c8490df1586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  normalEnemyPrefab: {fileID: 4989700645896654806, guid: e264b7c57a2256d40b9950bebaaef228, type: 3}
-  chargerEnemyPrefab: {fileID: 4989700645896654806, guid: 0911bab01b3c7f843989f485503b62a0, type: 3}
-  eliteEnemyPrefab: {fileID: 4989700645896654806, guid: 394a8305a4267a14690bc0eaf9d1efad, type: 3}
+  arenaGenerator: {fileID: 1479957700}
+  maxActiveEnemies: 55
+  minSpawnRadius: 10.5
+  maxSpawnRadius: 13.5
+  spawnClearance: 0.6
   spawnInterval: 1
   minSpawnInterval: 0.5
   spawnIntervalDecrease: 0.03
-  spawnRadius: 10
   phase2StartTime: 30
   phase3StartTime: 75
   eliteInterval: 25
@@ -3809,8 +3859,8 @@ MonoBehaviour:
     serializedVersion: 0
     m_Bits: 1
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.2
@@ -5601,11 +5651,11 @@ GameObject:
   - component: {fileID: 1592279180}
   - component: {fileID: 1592279179}
   - component: {fileID: 1592279181}
-  - component: {fileID: 1592279183}
   - component: {fileID: 1592279182}
   - component: {fileID: 1592279184}
   - component: {fileID: 1592279185}
   - component: {fileID: 1592279186}
+  - component: {fileID: 1592279187}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5660,7 +5710,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 100005
   m_SortingLayer: 5
-  m_SortingOrder: 15
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a691148788dc87344bf09cc2f4418458, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5729,52 +5779,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
---- !u!61 &1592279183
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592279178}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &1592279184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5791,6 +5795,12 @@ MonoBehaviour:
   fireInterval: 1
   fireRange: 10
   shootSFX: {fileID: 8300000, guid: 4d8c11d14661e0741ac920c595c48de0, type: 3}
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 6144
   bulletDamage: 1
   projectileCount: 1
   spreadAngle: 15
@@ -5826,6 +5836,42 @@ MonoBehaviour:
   currentXP: 0
   xpToNextLevel: 3
   magnetRadius: 2.5
+--- !u!58 &1592279187
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592279178}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.38
 --- !u!1 &1630091054
 GameObject:
   m_ObjectHideFlags: 0
@@ -7619,3 +7665,4 @@ SceneRoots:
   - {fileID: 1694286831}
   - {fileID: 1479957701}
   - {fileID: 1091221067}
+  - {fileID: 284987632}

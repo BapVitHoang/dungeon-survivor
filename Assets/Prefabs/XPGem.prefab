@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7594884010682075485}
   - component: {fileID: 166839849674006676}
   - component: {fileID: 8894338991654189245}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: XPGem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,9 +79,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 100004
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ade445bf66412394e8ada28aa75fa9a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -143,4 +143,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XPGem
   xpAmount: 1
+  moveSpeed: 8
   collectSFX: {fileID: 8300000, guid: 345cf3c4482b1774fad8a509232e0810, type: 3}

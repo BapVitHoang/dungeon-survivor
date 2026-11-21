@@ -7,24 +7,38 @@ public class AutoShooter : MonoBehaviour
     [SerializeField] private float fireRange = 10f;
     [SerializeField] private AudioClip shootSFX;
 
+    [Header("Targeting & LOS")]
+    [SerializeField] private LayerMask enemyLayerMask;
+    [SerializeField] private LayerMask obstacleMask;
+
     [Header("Weapon Stats")]
     [SerializeField] private int bulletDamage = 1;
     [SerializeField] private int projectileCount = 1;
     [SerializeField] private float spreadAngle = 15f;
 
+    private readonly Collider2D[] hitBuffer = new Collider2D[32];
+    private ContactFilter2D enemyFilter;
     private float fireTimer;
 
+    private void Awake()
+    {
+        enemyFilter = new ContactFilter2D();
+        enemyFilter.SetLayerMask(enemyLayerMask);
+        enemyFilter.useTriggers = false;
+    }
     private void Update()
     {
-        fireTimer += Time.deltaTime;
+        fireTimer = Mathf.Min(fireTimer + Time.deltaTime, fireInterval);
         if (fireTimer >= fireInterval)
         {
-            fireTimer = 0f;
-            ShootNearestEnemy();
+            if (TryShootNearestEnemy())
+            {
+                fireTimer = 0f;
+            }
         }
     }
 
-    private void ShootNearestEnemy()
+/*    private void ShootNearestEnemy()
     {
         Transform nearestEnemy = FindNearestEnemy();
         if (nearestEnemy == null) return;
@@ -45,26 +59,55 @@ public class AutoShooter : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
+    private bool TryShootNearestEnemy()
+    {
+        Transform nearestEnemy = FindNearestEnemy();
+        if (nearestEnemy == null) return false;
+
+        Vector2 baseDirection = (nearestEnemy.position - transform.position).normalized;
+        AudioManager.Instance?.PlaySFX(shootSFX);
+
+        float startAngle = -((projectileCount - 1) * spreadAngle) / 2f;
+        for (int i = 0;i < projectileCount;i++)
+        {
+            float angle = startAngle + i * spreadAngle;
+            Vector2 dir = Quaternion.Euler(0f,0f,angle) * baseDirection;
+
+            Bullet bullet;
+            if (PoolManager.Instance != null)
+            {
+                bullet = PoolManager.Instance.GetBullet(transform.position);
+            }
+            else
+            {
+                GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet = bulletObj.GetComponent<Bullet>();
+            }
+
+            if (bullet != null)
+            {
+                bullet.Initialize(dir, bulletDamage);
+            }
+        }
+        return true;
+    }
     private Transform FindNearestEnemy()
     {
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, fireRange);
+        int hitCount = Physics2D.OverlapCircle(transform.position, fireRange, enemyFilter,hitBuffer);
         Transform nearestEnemy = null;
         float closestDistanceSqr = Mathf.Infinity;
 
-        foreach (Collider2D hit in hits)
+        for (int i = 0; i < hitCount; i++)
         {
-            if (hit.CompareTag("Enemy"))
-            {
-                float distanceSqr = (hit.transform.position - transform.position).sqrMagnitude;
-                if (distanceSqr < closestDistanceSqr)
-                {
-                    closestDistanceSqr = distanceSqr;
-                    nearestEnemy = hit.transform;
-                }
-            }
+            Transform candiate = hitBuffer[i].transform;
+            float distanceSqr = (candiate.position - transform.position).sqrMagnitude;
+            if (distanceSqr >= closestDistanceSqr) continue;
+            if (Physics2D.Linecast(transform.position, candiate.position, obstacleMask).collider != null) continue;
+            closestDistanceSqr = distanceSqr;
+            nearestEnemy = candiate;
         }
         return nearestEnemy;
     }
@@ -85,6 +128,10 @@ public class AutoShooter : MonoBehaviour
     {
         projectileCount = Mathf.Min(7, projectileCount + amount);
     }
+
+    public bool CanUpgradeFireRate() => fireInterval > 0.15f;
+
+    public bool CanAddProjectiles() => projectileCount < 7;
 }
 
 

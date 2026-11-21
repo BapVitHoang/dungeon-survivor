@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4505870159756205397}
   - component: {fileID: 2552004767191629239}
   - component: {fileID: -5985795289515098202}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FastEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 100005
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 6b4b106c5d497bd419c0e17a4e1ade9f, type: 3}
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.4
 --- !u!114 &-5985795289515098202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,9 +175,18 @@ MonoBehaviour:
   damage: 1
   xpGemPrefab: {fileID: 4035835439903146077, guid: b862de28738036044a81a8319689a8af, type: 3}
   hitSFX: {fileID: 8300000, guid: a1b6effb9265ec14cba2be48559bc031, type: 3}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 6144
+  avoidCheckDistance: 1.1
+  knockbackForce: 4
+  knockbackDuration: 0.08
+  knockbackResistance: 0
   dashRange: 5
   telegraphDuration: 0.4
   dashDuration: 0.2
   dashSpeedMultiplier: 3
   dashCooldown: 2
   telegraphColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  dashSFX: {fileID: 8300000, guid: 4332bcf894e141d4ca5663841be12dce, type: 3}
+  telegraphIndicator: {fileID: 0}
