@@ -8,4 +8,10 @@ public abstract class UpgradeSO : ScriptableObject
     public Sprite icon;
 
     public abstract void Apply(GameObject player);
+
+    public virtual bool CanApply(GameObject player)
+    {
+        return true;
+    }
+
 }

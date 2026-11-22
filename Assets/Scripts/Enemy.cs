@@ -163,6 +163,13 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         OnHealthChanged?.Invoke(currentHealth,maxHealth);
         AudioManager.Instance?.PlaySFX(hitSFX);
+        if (PoolManager.Instance != null)
+        {
+            float offsetX = UnityEngine.Random.Range(-0.2f, 0.2f);
+            Vector3 popupPos = transform.position + new Vector3(offsetX,0.55f,0f);
+            Color popupColor = (damage >=2) ? Palette.AccentGold : Palette.TextPrimary;
+            PoolManager.Instance.SpawnDamagePopup(popupPos,damage,popupColor);
+        }
         if (CanTakeKnockback() && hitDirection.sqrMagnitude > 0.001f)
         {
             float effectiveForce = knockbackForce * (1f - knockbackResistance);
@@ -210,7 +217,11 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(xpGemPrefab, transform.position, Quaternion.identity);
         }
-
+        if (PoolManager.Instance !=null)
+        {
+            Color burstColor = (enemyType == EnemyType.Elite) ? Palette.AccentGold : Palette.HealthCrimson;
+            PoolManager.Instance.SpawnDeathVFX(transform.position, burstColor);
+        }
   
         OnAnyEnemyDied?.Invoke();
         if (enemyType == EnemyType.Elite)

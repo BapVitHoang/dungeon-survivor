@@ -17,12 +17,16 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private Enemy chargerEnemyPrefab;
     [SerializeField] private Enemy eliteEnemyPrefab;
     [SerializeField] private XPGem xpgemPrefab;
+    [SerializeField] private DeathVFX deathVFXPrefab;
+    [SerializeField] private DamagePopup damagePopupPrefab;
 
     private ObjectPool<Bullet> bulletPool;
     private ObjectPool<Enemy> normalEnemyPool;
     private ObjectPool<Enemy> chargerEnemyPool;
     private ObjectPool<Enemy> eliteEnemyPool;
     private ObjectPool<XPGem> xpGemPool;
+    private ObjectPool<DeathVFX> deathVFXPool;
+    private ObjectPool<DamagePopup> damagePopupPool;
 
     private void Awake()
     {
@@ -32,6 +36,14 @@ public class PoolManager : MonoBehaviour
         chargerEnemyPool = CreatePool(chargerEnemyPrefab, 10, 35);
         eliteEnemyPool = CreatePool(eliteEnemyPrefab, 3, 10);
         xpGemPool = CreatePool(xpgemPrefab, 30, 150);
+        if(deathVFXPrefab!= null)
+        {
+            deathVFXPool = CreatePool(deathVFXPrefab,15,60);
+        }
+        if(damagePopupPrefab!= null)
+        {
+            damagePopupPool = CreatePool(damagePopupPrefab,20,60);
+        }
 
     }
 
@@ -98,5 +110,33 @@ public class PoolManager : MonoBehaviour
     public void ReleaseXPGem(XPGem gem)
     {
         xpGemPool.Release(gem);
+    }
+
+    public void SpawnDeathVFX(Vector3 position, Color tint)
+    {
+        if (deathVFXPool == null) return;
+
+        DeathVFX vfx = deathVFXPool.Get();
+        vfx.transform.position = position;
+        vfx.Play(tint, ReleaseDeathVFX);
+
+    }
+
+    private void ReleaseDeathVFX(DeathVFX vfx)
+    {
+        deathVFXPool.Release(vfx);
+    }
+
+    public void SpawnDamagePopup(Vector3 position, int damageAmount, Color color)
+    {
+        if (damagePopupPool == null) return;
+        DamagePopup popup = damagePopupPool.Get();
+        popup.transform.position = position;
+        popup.Play(damageAmount,color,ReleaseDamagePopup);
+    }
+
+    private void ReleaseDamagePopup(DamagePopup popup)
+    {
+        damagePopupPool.Release(popup);
     }
 }
