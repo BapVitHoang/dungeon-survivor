@@ -6648,6 +6648,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444109224}
   - component: {fileID: 444109225}
+  - component: {fileID: 444109226}
   m_Layer: 0
   m_Name: MenuPointLight
   m_TagString: Untagged
@@ -6742,6 +6743,22 @@ MonoBehaviour:
           rid: -2
         m_Provider2DCache:
           rid: -2
+--- !u!114 &444109226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444109223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ed11610122bfa4cb3e01e6501f9bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TorchFlicker
+  torchLight: {fileID: 0}
+  flickerSpeed: 6
+  intensityVariance: 0.15
+  radiusVariance: 0.25
 --- !u!1 &451731139
 GameObject:
   m_ObjectHideFlags: 0
@@ -19101,6 +19118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1316255495}
   - component: {fileID: 1316255496}
+  - component: {fileID: 1316255497}
   m_Layer: 0
   m_Name: MenuPointLight
   m_TagString: Untagged
@@ -19195,6 +19213,22 @@ MonoBehaviour:
           rid: -2
         m_Provider2DCache:
           rid: -2
+--- !u!114 &1316255497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316255494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ed11610122bfa4cb3e01e6501f9bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TorchFlicker
+  torchLight: {fileID: 0}
+  flickerSpeed: 6
+  intensityVariance: 0.15
+  radiusVariance: 0.25
 --- !u!1 &1330690534
 GameObject:
   m_ObjectHideFlags: 0
@@ -19526,6 +19560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1338301047}
   - component: {fileID: 1338301048}
+  - component: {fileID: 1338301049}
   m_Layer: 0
   m_Name: GhostPreview
   m_TagString: Untagged
@@ -19609,6 +19644,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1338301049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338301046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45100a0972793449e4b90896167947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteBob
+  walkBobFrequency: 12
+  walkBobHeight: 0.05
+  walkTiltAngle: 6
+  idleBreatheFrequency: 2.5
+  idleBreatheAmount: 0.03
 --- !u!1 &1344630649
 GameObject:
   m_ObjectHideFlags: 0
@@ -19711,6 +19763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1366797359}
   - component: {fileID: 1366797360}
+  - component: {fileID: 1366797361}
   m_Layer: 0
   m_Name: HeroPreview
   m_TagString: Untagged
@@ -19794,6 +19847,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1366797361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366797358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45100a0972793449e4b90896167947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteBob
+  walkBobFrequency: 12
+  walkBobHeight: 0.05
+  walkTiltAngle: 6
+  idleBreatheFrequency: 2.5
+  idleBreatheAmount: 0.03
 --- !u!1 &1367793247
 GameObject:
   m_ObjectHideFlags: 0
@@ -21781,6 +21851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1469584654}
   - component: {fileID: 1469584655}
+  - component: {fileID: 1469584656}
   m_Layer: 0
   m_Name: MenuPointLight
   m_TagString: Untagged
@@ -21875,6 +21946,22 @@ MonoBehaviour:
           rid: -2
         m_Provider2DCache:
           rid: -2
+--- !u!114 &1469584656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469584653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03ed11610122bfa4cb3e01e6501f9bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TorchFlicker
+  torchLight: {fileID: 0}
+  flickerSpeed: 6
+  intensityVariance: 0.15
+  radiusVariance: 0.25
 --- !u!1 &1491307546
 GameObject:
   m_ObjectHideFlags: 0
@@ -25167,6 +25254,103 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1001 &1687723449
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3956685083128591181, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_Name
+      value: SceneFader
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133685883437509894, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6c209b99fcf0fe948aba688f7581951f, type: 3}
 --- !u!1 &1688208551
 GameObject:
   m_ObjectHideFlags: 0
@@ -31473,6 +31657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2093881085}
   - component: {fileID: 2093881086}
+  - component: {fileID: 2093881087}
   m_Layer: 0
   m_Name: CyclopPreview
   m_TagString: Untagged
@@ -31556,6 +31741,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &2093881087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093881084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f45100a0972793449e4b90896167947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteBob
+  walkBobFrequency: 12
+  walkBobHeight: 0.05
+  walkTiltAngle: 6
+  idleBreatheFrequency: 2.5
+  idleBreatheAmount: 0.03
 --- !u!1 &2098821105
 GameObject:
   m_ObjectHideFlags: 0
@@ -32209,3 +32411,4 @@ SceneRoots:
   - {fileID: 33990458}
   - {fileID: 1928319039}
   - {fileID: 1373174562}
+  - {fileID: 1687723449}

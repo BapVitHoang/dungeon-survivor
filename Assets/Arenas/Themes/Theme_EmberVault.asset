@@ -16,14 +16,62 @@ MonoBehaviour:
   baseFloorTile: {fileID: 11400000, guid: 011c7070f0ae4d04ebcc0b0364dc7041, type: 2}
   variantFloorTiles:
   - {fileID: 11400000, guid: 64eaef7139b2efc48a121c065d3ac025, type: 2}
+  - {fileID: 11400000, guid: 64eaef7139b2efc48a121c065d3ac025, type: 2}
   - {fileID: 11400000, guid: b2281d3a6d22f8440a9f831a1deb7ddc, type: 2}
-  variantChance: 0.2
+  variantChance: 0.15
   wallTile: {fileID: 11400000, guid: b4e4e32f4e47c5b4296ad927044585db, type: 2}
-  obstacleTile: {fileID: 11400000, guid: 30e0daaf64269874da57e44c8f493873, type: 2}
-  decorTiles:
-  - {fileID: 11400000, guid: 1577fb096a5ef2247878c9e2ed704069, type: 2}
-  decorChance: 0.03
-  floorTint: {r: 0.56, g: 0.45, b: 0.45, a: 1}
-  ambientLightColor: {r: 0.52, g: 0.4, b: 0.44, a: 1}
-  ambientIntensity: 0.55
-  torchLightColor: {r: 1, g: 0.48, b: 0.22, a: 1}
+  obstacleTile: {fileID: 11400000, guid: b4e4e32f4e47c5b4296ad927044585db, type: 2}
+  decorTiles: []
+  decorChance: 0
+  roofBaseTile: {fileID: 11400000, guid: 59d3358347cca2d4e9107c7f2df6a437, type: 2}
+  roofVariantTiles:
+  - {fileID: 11400000, guid: 8a50656641aaa9f42b74892970f116b5, type: 2}
+  roofRimTop: {fileID: 11400000, guid: 9d8f40f8825167c4c900b62e18484b91, type: 2}
+  roofRimBottom: {fileID: 11400000, guid: 4af7b1ca38a5b964193a4ee794b64a46, type: 2}
+  roofRimLeft: {fileID: 11400000, guid: f99785f635b04a3438551333747802a8, type: 2}
+  roofRimRight: {fileID: 11400000, guid: 1a99338ca7ced1547a5f81e77eeaa6c8, type: 2}
+  roofCornerOuterTL: {fileID: 11400000, guid: 5b262daf2a1f2c44f886d4d3fb49914f, type: 2}
+  roofCornerOuterTR: {fileID: 11400000, guid: f7c00c55439f7ca448e1ea03e18bc5d3, type: 2}
+  roofCornerOuterBL: {fileID: 11400000, guid: 7e6fc8d6c46ce21478e38b09a327f323, type: 2}
+  roofCornerOuterBR: {fileID: 11400000, guid: b2c4d133669151841b0732a284becd04, type: 2}
+  roofCornerInnerTL: {fileID: 11400000, guid: c5cfdec2d02eb2045a7a80c11a6c66de, type: 2}
+  roofCornerInnerTR: {fileID: 11400000, guid: caa25706529829e48871157bdece27fd, type: 2}
+  roofCornerInnerBL: {fileID: 11400000, guid: a6b391c5f8f675240a659e870fce8f3e, type: 2}
+  roofCornerInnerBR: {fileID: 11400000, guid: 35d12ced5aa329c49872bedcbcae9dfe, type: 2}
+  facadeMidTile: {fileID: 11400000, guid: b4e4e32f4e47c5b4296ad927044585db, type: 2}
+  facadeLeftTile: {fileID: 11400000, guid: c9c8ae75efe326840b0a953881b5b233, type: 2}
+  facadeRightTile: {fileID: 11400000, guid: 7d86110c3369b024e98e82c77e762d9c, type: 2}
+  facadeSingleTile: {fileID: 11400000, guid: 94ee5b5824fc1d84aa7ae8e83ad45e01, type: 2}
+  facadeAccentTiles:
+  - {fileID: 11400000, guid: 31e490310ab054344976a1d29b0cf601, type: 2}
+  - {fileID: 11400000, guid: 71805770f62e77e4b92715db4fa3958c, type: 2}
+  - {fileID: 11400000, guid: aa4c5d17f75aa80479504dda90738541, type: 2}
+  - {fileID: 11400000, guid: 472172ec30942fe48a73d1642025d7a7, type: 2}
+  - {fileID: 11400000, guid: bf261eb129805644b9a0a4c01d33f3bb, type: 2}
+  facadeAccentChance: 0.24
+  floorShadowTile: {fileID: 11400000, guid: f03c0d9b56e4d6d40b2642cdc5bc08bb, type: 2}
+  floorShadowVariantTile: {fileID: 11400000, guid: 63b367c76adb9ed4e8bb737215bd679c, type: 2}
+  pavedLeftTile: {fileID: 11400000, guid: 62a7c05e7f039d74e81cc4e43466584c, type: 2}
+  pavedMidTile: {fileID: 11400000, guid: ddf75d22be0de434ca17387c98efe94d, type: 2}
+  pavedRightTile: {fileID: 11400000, guid: e2681444ab613b5408063c019bfb06e6, type: 2}
+  graveDirtTile: {fileID: 11400000, guid: c4becc9f49273ed49ae36e52c4f293ba, type: 2}
+  railHorizontalTile: {fileID: 11400000, guid: 0b4dd183b326bc344badd92e5fa93234, type: 2}
+  railVerticalTile: {fileID: 11400000, guid: 913d365dab04012469afc63380eb28ae, type: 2}
+  railCornerTL: {fileID: 11400000, guid: 01878855e59c32d45a960a7fc82b49c9, type: 2}
+  railCornerTR: {fileID: 11400000, guid: f8785a960f29a71428e5bf63686be90b, type: 2}
+  railCornerBL: {fileID: 11400000, guid: 654fca8e5ad63b846bda351826590256, type: 2}
+  railCornerBR: {fileID: 11400000, guid: 382b16640302d3746a117dc4854b16a8, type: 2}
+  propCrateTile: {fileID: 11400000, guid: 30e0daaf64269874da57e44c8f493873, type: 2}
+  propBarrelTile: {fileID: 11400000, guid: d1e67e0cb426fc941b8fab967f234d77, type: 2}
+  propChestTile: {fileID: 11400000, guid: c97486a1dad3fe04680e6903c5bc5837, type: 2}
+  propCrossGraveTile: {fileID: 11400000, guid: 1d261437fb02fd146973bf2bcd4515ad, type: 2}
+  propStoneGraveTile: {fileID: 11400000, guid: d346a1539b69f304ca5ccb05114ab61d, type: 2}
+  propIronFenceTile: {fileID: 11400000, guid: 646b19c542bd9f841b87ce491054815c, type: 2}
+  propAnvilTile: {fileID: 11400000, guid: 4d3c6b932d37c9a46a6dfac156231c1d, type: 2}
+  propTableTile: {fileID: 11400000, guid: 0edfc8bb81384c047b1eec7e5316c459, type: 2}
+  propMinecartTile: {fileID: 11400000, guid: 49fb51238ed53e741ae595c4ecf2b220, type: 2}
+  floorTint: {r: 0.84, g: 0.72, b: 0.66, a: 1}
+  ambientLightColor: {r: 0.94, g: 0.82, b: 0.84, a: 1}
+  wallTint: {r: 0.96, g: 0.9, b: 0.92, a: 1}
+  ambientIntensity: 0.68
+  torchLightColor: {r: 1, g: 0.56, b: 0.24, a: 1}

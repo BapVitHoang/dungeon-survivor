@@ -80,7 +80,15 @@ public class MainMenu : MonoBehaviour
     {
         AudioManager.Instance?.EnsureMusicPlaying();
         AudioManager.Instance?.PlayUIClick();
-        SceneManager.LoadScene("Gameplay");
+        if (SceneFader.Instance != null)
+        {
+            SceneFader.Instance.FadeToScene("Gameplay");
+        }
+        else
+        {
+            SceneManager.LoadScene("Gameplay");
+
+        }
     }
 
     public void QuitGame()

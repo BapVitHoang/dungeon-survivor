@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text resultText;
     [SerializeField] private TMP_Text summaryText;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private Slider pauseMusicSlider;
+    [SerializeField] private Slider pauseSfxSlider;
 
     [Header("Audio")]
     [SerializeField] private AudioClip victorySFX;
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
         
         if (pausePanel != null) pausePanel.SetActive(false);
 
+        SetupPauseAudioSlider();
         UpdateKillUI();
         UpdateTimerUI();
     }
@@ -215,6 +219,35 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance?.PlayUIClick();
         }
     }
+
+    private void SetupPauseAudioSlider()
+    {
+        if (pauseMusicSlider != null) 
+            {
+            float savedMusic = AudioManager.Instance != null ? AudioManager.Instance.GetSavedMusicVolume() : PlayerPrefs.GetFloat(AudioManager.MUSIC_VOLUME_KEY,0.3f);
+            pauseMusicSlider.value = savedMusic;
+            pauseMusicSlider.onValueChanged.RemoveListener(OnPauseMusicChanged);
+            pauseMusicSlider.onValueChanged.AddListener(OnPauseMusicChanged);
+        }
+        
+        if (pauseSfxSlider != null)
+        {
+            float savedSfx = AudioManager.Instance != null ? AudioManager.Instance.GetSavedSFXVolume() : PlayerPrefs.GetFloat(AudioManager.SFX_VOLUME_KEY, 0.8f);
+            pauseSfxSlider.value = savedSfx;
+            pauseSfxSlider.onValueChanged.RemoveListener(OnPauseSfxChanged);
+            pauseSfxSlider.onValueChanged.AddListener(OnPauseSfxChanged) ;
+        }
+
+    }
+
+    private void OnPauseMusicChanged(float value)
+    {
+        AudioManager.Instance?.SaveMusicVolume(value);
+    }
+    private void OnPauseSfxChanged(float value)
+    {
+        AudioManager.Instance?.SaveSFXVolume(value);
+    }
     private void HandlePlayerDied()
     {
         EndGame("Game Over",false);
@@ -222,17 +255,26 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f;
-        AudioManager.Instance?.RestoreMusicVolume();
-        AudioManager.Instance?.PlayUIClick();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        LoadSceneWithFade(SceneManager.GetActiveScene().name);
     }
 
     public void GoToMainMenu()
     {
-        Time.timeScale = 1f;
+        LoadSceneWithFade("MainMenu");
+    }
+
+    private void LoadSceneWithFade(string sceneName)
+    {
         AudioManager.Instance?.RestoreMusicVolume();
         AudioManager.Instance?.PlayUIClick();
-        SceneManager.LoadScene("MainMenu");
+        if (SceneFader.Instance != null)
+        {
+            SceneFader.Instance.FadeToScene(sceneName);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

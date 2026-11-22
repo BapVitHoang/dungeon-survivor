@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float damageCooldown = 1f;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private AudioClip damageSFX;
+    [SerializeField] private TMP_Text hpValueText;
 
     private int currentHealth;
     private float cooldownTimer;
@@ -23,12 +25,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (healthSlider != null)
-        {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
-        }
-        OnHealthChanged?.Invoke(currentHealth,maxHealth);
+        UpdateHealthUI();
     }
 
     // Update is called once per frame
@@ -59,11 +56,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth - damage);
         AudioManager.Instance?.PlaySFX(damageSFX);
         CameraFollow.Instance?.TriggerShake(0.18f, 0.22f);
-        if (healthSlider != null)
-        {
-            healthSlider.value = currentHealth;
-        }
-        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        UpdateHealthUI();
         Debug.Log("Player Health: " + currentHealth + "/" + maxHealth);
         if (currentHealth <= 0)
         {
@@ -122,10 +115,18 @@ public class PlayerHealth : MonoBehaviour
     {
         maxHealth += amount;
         currentHealth += amount;
+        UpdateHealthUI();   
+    }
+    private void UpdateHealthUI()
+    {
         if (healthSlider != null)
         {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
+        }
+        if (hpValueText != null)
+        {
+            hpValueText.text = $"{currentHealth}/{maxHealth}";
         }
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
