@@ -285,7 +285,7 @@ public class ArenaGenerator : MonoBehaviour
         foreach (ArenaPropPlacement prop in layout.props)
         {
             Vector2Int pos = layout.GetMirroredCell(prop.cell, signX, signY);
-            if (pos.x < -halfW || pos.x >= halfW || pos.y < -halfH || pos.y < -halfH) continue;
+            if (pos.x < -halfW || pos.x >= halfW || pos.y < -halfH || pos.y >= halfH) continue;
             if (Mathf.Abs(pos.x) <= 3 && Mathf.Abs(pos.y) <= 3) continue;
             if (occupied.Contains(pos)) continue;
             TileBase propTile = theme.GetPropTile(prop.type);
