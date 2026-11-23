@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Enemy Prefabs")]
-    [SerializeField] private GameObject normalEnemyPrefab;
-    [SerializeField] private GameObject chargerEnemyPrefab;
-    [SerializeField] private GameObject eliteEnemyPrefab;
+    [Header("References")]
+    [SerializeField] private ArenaGenerator arenaGenerator;
 
+    [Header("Spawn Limits & Radius")]
+    [SerializeField] private int maxActiveEnemies = 55;
+    [SerializeField] private float minSpawnRadius = 10.5f;
+    [SerializeField] private float maxSpawnRadius = 13.5f;
+    [SerializeField] private float spawnClearance = 0.6f;
 
     [Header("Spawn Timing")]
     [SerializeField] private float spawnInterval = 1.5f;
     [SerializeField] private float minSpawnInterval = 0.5f; // Minimum spawn interval   
     [SerializeField] private float spawnIntervalDecrease = 0.03f; // Amount to decrease spawn interval each time
-    [SerializeField] private float spawnRadius = 10f;
 
     [Header("Wave Pacing (Seconds)")]
     [SerializeField] private float phase2StartTime = 30f;
@@ -20,6 +22,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float eliteInterval = 25f;
 
     private Transform playerTransform;
+    private PlayerLevel playerLevel;
+    private int activeEnemyCount;
     private float spawnTimer;
     private float elapsedTime;
     private float eliteTimer;
@@ -30,9 +34,20 @@ public class EnemySpawner : MonoBehaviour
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
+            playerLevel = playerObj.GetComponent<PlayerLevel>();
         }
+        Enemy.OnAnyEnemyDied += HandleEnemyDied;
     }
 
+    private void OnDestroy()
+    {
+        Enemy.OnAnyEnemyDied -= HandleEnemyDied;
+    }
+    private void HandleEnemyDied()
+    {
+        activeEnemyCount = Mathf.Max(0, activeEnemyCount - 1);
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -62,41 +77,86 @@ public class EnemySpawner : MonoBehaviour
     }
     private void SpawnWave()
     {
+        if (PoolManager.Instance == null)
+        {
+            return;
+        }
         int count = (elapsedTime >= phase3StartTime) ? 2 : 1;
         for (int i = 0; i < count; i++)
         {
-            GameObject prefab = ChooseEnemyPrefab();
-            if (prefab != null)
+            if (activeEnemyCount >= maxActiveEnemies)
             {
-                Instantiate(prefab, GetRandomSpawnPosition(), Quaternion.identity);
+                return;
             }
+            EnemyType type = ChooseEnemyType();
+            Vector3 spawnPos = GetValidSpawnPosition();
+            Enemy enemy = PoolManager.Instance.GetEnemy(type, spawnPos);
+            enemy.Initialize(type,playerTransform,playerLevel);
+            activeEnemyCount++;
+            
 
         }
     }
 
-    private GameObject ChooseEnemyPrefab()
+    private EnemyType ChooseEnemyType()
     {
-        if (elapsedTime < phase2StartTime)
+       if (elapsedTime < phase2StartTime)
         {
-            return normalEnemyPrefab;
+            return EnemyType.Normal;
         }
-        if (elapsedTime < phase3StartTime)
+       if (elapsedTime < phase3StartTime)
         {
-            return (Random.value < 0.35f) ? chargerEnemyPrefab : normalEnemyPrefab;
+            return (Random.value < 0.35f) ? EnemyType.Charger : EnemyType.Normal;
         }
-        return (Random.value < 0.5f) ? chargerEnemyPrefab : normalEnemyPrefab;
+
+        return (Random.value < 0.5f) ? EnemyType.Charger : EnemyType.Normal;
     }
 
     private void SpawnElite()
     {
-        if (eliteEnemyPrefab == null) return;
-        Instantiate(eliteEnemyPrefab, GetRandomSpawnPosition(),Quaternion.identity);
+        if (PoolManager.Instance ==null || activeEnemyCount >= maxActiveEnemies +3)
+        {
+            return;
+        }
+        Vector3 spawnPos = GetValidSpawnPosition();
+        Enemy elite = PoolManager.Instance.GetEnemy(EnemyType.Elite, spawnPos);
+        elite.Initialize(EnemyType.Elite, playerTransform,playerLevel);
+        activeEnemyCount++;
     }
 
-    private Vector3 GetRandomSpawnPosition()
+    private Vector3 GetValidSpawnPosition()
     {
-        Vector2 randomCircle = Random.insideUnitCircle.normalized * spawnRadius;
-        return playerTransform.position + new Vector3(randomCircle.x, randomCircle.y, 0f);
-
+        for (int attempt = 0; attempt < 12; attempt++)
+        {
+            Vector2 dir = Random.insideUnitCircle.normalized;
+            if (dir == Vector2.zero)
+            {
+                dir = Vector2.right;
+            }
+            float radius = Random.Range(minSpawnRadius, maxSpawnRadius);
+            Vector3 candidate = playerTransform.position + new Vector3(dir.x * radius, dir.y * radius, 0f);
+            if (arenaGenerator == null || arenaGenerator.IsPositionWalkable(candidate,spawnClearance))
+            {
+                return candidate;
+            }
+            
+        }
+        if (arenaGenerator != null)
+        {
+            Bounds bounds = arenaGenerator.PlayableBounds;
+            for (int attempt = 0; attempt < 18; attempt++)
+            {
+                float x = Random.Range(bounds.min.x + 1.5f, bounds.max.x - 1.5f);
+                float y = Random.Range(bounds.min.y + 1.5f, bounds.max.y - 1.5f);
+                Vector3 fallback = new Vector3(x, y, 0f);
+                float distToPlayerSqr = (fallback - playerTransform.position).sqrMagnitude;
+                if (arenaGenerator.IsPositionWalkable(fallback, spawnClearance) && distToPlayerSqr >= 25f)
+                {
+                    return fallback;
+                }
+                
+            }
+        }
+        return Vector3.zero;
     }
 }

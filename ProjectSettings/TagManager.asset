@@ -14,12 +14,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Bullet
+  - Wall
+  - Obstacle
+  - Pickup
   - 
   - 
   - 
@@ -41,6 +41,24 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 100001
+    locked: 0
+  - name: Walls
+    uniqueID: 100002
+    locked: 0
+  - name: Shadows
+    uniqueID: 100003
+    locked: 0
+  - name: Pickups
+    uniqueID: 100004
+    locked: 0
+  - name: Entities
+    uniqueID: 100005
+    locked: 0
+  - name: VFX
+    uniqueID: 100006
     locked: 0
   m_RenderingLayers:
   - Default

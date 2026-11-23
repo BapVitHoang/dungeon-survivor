@@ -8,13 +8,24 @@ public class MainMenu : MonoBehaviour
     [Header("Menu UI")]
     [SerializeField] private TMP_Text bestRecordText;
     [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private GameObject quitButton;
 
     private void Start()
     {
         Time.timeScale = 1.0f;
 
+        
+
         LoadBestRecords();
         SetupVolumeSlider();
+        SetupSFXSlider();
+#if UNITY_WEBGL
+    if (quitButton != null)
+            {
+                quitButton.SetActive(false);
+            }
+#endif
     }
 
     private void LoadBestRecords()
@@ -31,26 +42,58 @@ public class MainMenu : MonoBehaviour
 
     private void SetupVolumeSlider()
     {
-        if (volumeSlider == null) return;
+        if (volumeSlider != null)
+        {
+            float savedMusic = AudioManager.Instance != null
+                ? AudioManager.Instance.GetSavedMusicVolume()
+                : PlayerPrefs.GetFloat(AudioManager.MUSIC_VOLUME_KEY, 0.3f);
+            volumeSlider.value = savedMusic;
+            volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
+            volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
 
-        float savedVol = PlayerPrefs.GetFloat(AudioManager.MUSIC_VOLUME_KEY, 0.3f);
-        volumeSlider.value = savedVol;
-        volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        }
+    }
+
+    private void SetupSFXSlider()
+    {
+        if (sfxSlider != null)
+        {
+            float savedSFX = AudioManager.Instance != null
+                ? AudioManager.Instance.GetSavedSFXVolume()
+                : PlayerPrefs.GetFloat(AudioManager.SFX_VOLUME_KEY, 0.8f);
+            sfxSlider.value = savedSFX;
+            sfxSlider.onValueChanged.RemoveListener(OnSFXVolumeChanged);
+            sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        }
     }
 
     public void OnVolumeChanged(float value)
     {
-        PlayerPrefs.SetFloat(AudioManager.MUSIC_VOLUME_KEY, value);
-        PlayerPrefs.Save();
-        AudioManager.Instance?.SetMusicVolume(value);
+        AudioManager.Instance?.SaveMusicVolume(value);
+    }
+
+    public void OnSFXVolumeChanged(float value)
+    {
+        AudioManager.Instance?.SaveSFXVolume(value);
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        AudioManager.Instance?.EnsureMusicPlaying();
+        AudioManager.Instance?.PlayUIClick();
+        if (SceneFader.Instance != null)
+        {
+            SceneFader.Instance.FadeToScene("Gameplay");
+        }
+        else
+        {
+            SceneManager.LoadScene("Gameplay");
+
+        }
     }
 
     public void QuitGame()
     {
+        AudioManager.Instance?.PlayUIClick();
         Application.Quit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying =false;

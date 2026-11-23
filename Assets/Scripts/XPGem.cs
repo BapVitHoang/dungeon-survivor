@@ -8,15 +8,31 @@ public class XPGem : MonoBehaviour
 
     private Transform playerTransform;
     private PlayerLevel playerLevel;
+    private bool isCollected;
+
+    public void Initialize(Transform playerTarget, PlayerLevel levelRef)
+    {
+        playerTransform = playerTarget;
+        playerLevel = levelRef;
+        isCollected = false;
+        if (playerTransform != null && playerLevel == null)
+        {
+            playerLevel = playerTransform.GetComponent<PlayerLevel>();
+        }
+    }
 
     private void Start()
     {
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
+        if (playerTransform == null)
         {
-            playerTransform = playerObj.transform;
-            playerLevel = playerObj.GetComponent<PlayerLevel>();
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                playerTransform = playerObj.transform;
+                playerLevel = playerObj.GetComponent<PlayerLevel>();
+            }
         }
+
     }
 
     private void Update()
@@ -26,22 +42,39 @@ public class XPGem : MonoBehaviour
             return;
         }
 
-        float distance = Vector2.Distance(transform.position, playerTransform.position);
-        if (distance <= playerLevel.MagnetRadius)
+        float magnetRadius = playerLevel.MagnetRadius;
+        float distanceSqr = (playerTransform.position - transform.position).sqrMagnitude;
+        if (distanceSqr <= magnetRadius * magnetRadius)
         {
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
-
         }
     }
-  
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerLevel hitplayerLevel = collision.GetComponent<PlayerLevel>();
-        if (hitplayerLevel != null)
+        if (isCollected)
         {
+            return;
+        }
+
+        if (collision.TryGetComponent(out PlayerLevel hitplayerLevel))
+        {
+            isCollected = true;
             hitplayerLevel.AddXP(xpAmount);
-            AudioManager.Instance?.PlaySFX(collectSFX,0.25f);
-            Destroy(gameObject); 
+            AudioManager.Instance?.PlaySFX(collectSFX, 0.25f);
+            ReleaseToPool();
+        }
+    }
+
+    private void ReleaseToPool()
+    {
+        if (PoolManager.Instance != null)
+        {
+            PoolManager.Instance.ReleaseXPGem(this);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
