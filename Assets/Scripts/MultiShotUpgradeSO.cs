@@ -18,4 +18,12 @@ public class MultiShotUpgradeSO : UpgradeSO
             Debug.LogWarning("AutoShooter component not found on player.");
         }
     }
+    public override bool CanApply(GameObject player)
+    {
+        if (player != null && player.TryGetComponent(out AutoShooter shooter))
+        {
+            return shooter.CanAddProjectiles();
+        }
+        return true;
+    }
 }

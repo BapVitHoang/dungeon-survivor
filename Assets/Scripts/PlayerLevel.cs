@@ -21,10 +21,14 @@ public class PlayerLevel : MonoBehaviour
     }
     public void AddXP(int amount)
     {
-        currentXP += amount;
-        if (currentXP >= xpToNextLevel)
+        if(amount <=0)
         {
-            LevelUp();     
+            return;
+        }
+        currentXP += amount;
+        while (currentXP >= xpToNextLevel)
+        {
+            LevelUp();
         }
         OnLevelChange?.Invoke(currentXP, xpToNextLevel, currentLevel);
     }

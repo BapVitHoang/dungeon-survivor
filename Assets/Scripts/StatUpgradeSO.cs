@@ -58,4 +58,16 @@ public class StatUpgradeSO: UpgradeSO
         }
 
     }
+    public override bool CanApply(GameObject player)
+    {
+        if (statType == StatType.FireRate && player !=null)
+        {
+            if (player.TryGetComponent(out AutoShooter shooter))
+            {
+                return shooter.CanUpgradeFireRate();
+            }
+            
+        }
+        return true;
+    }
 }
